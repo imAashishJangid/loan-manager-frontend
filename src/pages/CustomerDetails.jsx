@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { loadData, saveData } from "../utils/storage";
 import { calcEmi, totalPayable } from "../utils/calc";
+import API from "../api";
 
 const CustomerDetails = () => {
   const { id } = useParams();
