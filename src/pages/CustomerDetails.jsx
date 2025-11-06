@@ -9,28 +9,18 @@ const CustomerDetails = () => {
   const [customer, setCustomer] = useState(null);
 
   // ✅ Fetch data (local + backend fallback)
-  useEffect(() => {
-    const data = loadData();
-    let found = data.find((x) => x.id == id || x._id == id);
-
-    if (found) {
-      setCustomer(found);
-    } else {
-      const fetchCustomer = async () => {
-        try {
-const res = await fetch(`${import.meta.env.VITE_API_URL}/api/customers/${id}`);
-          if (!res.ok) throw new Error("Not found");
-          const customerData = await res.json();
-          setCustomer(customerData);
-        } catch (err) {
-          console.error("Error fetching:", err);
-          alert("Customer not found");
-          navigate("/");
-        }
-      };
-      fetchCustomer();
+useEffect(() => {
+  const fetchCustomer = async () => {
+    try {
+      const res = await API.get(`/customers/${id}`); // ✅ No extra /api here
+      setCustomer(res.data);
+    } catch (err) {
+      console.error("Error fetching:", err);
     }
-  }, [id, navigate]);
+  };
+  fetchCustomer();
+}, [id]);
+
 
   if (!customer)
     return (
