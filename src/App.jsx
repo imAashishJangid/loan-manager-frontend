@@ -6,9 +6,6 @@ import CustomerForm from "./pages/CustomerForm";
 import CustomerDetails from "./pages/CustomerDetails";
 import CustomerDetailss from "./pages/CustomerDetails";
 
-
-
-
 const App = () => {
   return (
     <div>
@@ -17,7 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/add" element={<CustomerForm />} />
-          <Route path="/edit/:id" element={<CustomerForm editMode />} />
+          <Route path="/edit/:id" element={<CustomerForm editMode={true} />} />
           <Route path="/customer/:id" element={<CustomerDetails />} />
           <Route path="/customer/:id" element={<CustomerDetailss />} />
           <Route path="*" element={<Navigate to="/" replace />} />

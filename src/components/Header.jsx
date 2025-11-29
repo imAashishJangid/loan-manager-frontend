@@ -1,31 +1,25 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { loadData, clearData } from "../utils/storage";
-import { exportToCSV } from "../utils/csv";
+import { NavLink } from "react-router-dom";
+import logo from "../assets/logo.png";  // ← ADD THIS
 
 const Header = () => {
-  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleExport = () => {
-    const data = loadData();
-    exportToCSV(data);
-  };
-
-  const handleClear = () => {
-    if (!window.confirm("Are you sure you want to delete all local data?")) return;
-    clearData();
-    navigate(0);
-  };
-
-  // 👉 ye function nav click ke baad menu close karega
   const handleNavClick = () => {
     setMenuOpen(false);
   };
 
   return (
     <header className="header">
-      <div className="logo-title">
+      <div 
+        className="logo-title" 
+        style={{ display: "flex", alignItems: "center", gap: "10px" }}
+      >
+        <img 
+          src={logo}
+          alt="Logo"
+          style={{ height: "40px", width: "40px", objectFit: "contain" }}
+        />
         <h1>Had Finance — Loan CRM</h1>
       </div>
 
@@ -49,14 +43,6 @@ const Header = () => {
         >
           Add Customer
         </NavLink>
-
-        <button onClick={() => { handleExport(); handleNavClick(); }} className="btn ghost">
-          Export CSV
-        </button>
-
-        <button onClick={() => { handleClear(); handleNavClick(); }} className="btn ghost">
-          Clear Data
-        </button>
       </nav>
     </header>
   );
